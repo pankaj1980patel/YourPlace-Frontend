@@ -11,7 +11,7 @@ const DUMMY_PLACES = [
     description: "Tallest Building in the world",
     address: "Navagam, India(IN)",
     creatorId: "u1",
-    location: { lat: 21.838, lng: 21.838 },
+    location: { lat: 21.838031685449245, lng : 73.71911602170074 },
   },
   {
     id: "p2",
@@ -21,7 +21,7 @@ const DUMMY_PLACES = [
     description: "Temple of Lord Shiva",
     address: "Surat, Gujarat, India(IN)",
     creatorId: "u2",
-    location: { lat: 21.2268256, lng: 72.8152983 },
+    location: { lat: 21.28072235129267, lng : 73.08025617066227 },
   },
 ];
 const UserPlaces = (props) => {
