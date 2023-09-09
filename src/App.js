@@ -7,7 +7,7 @@ import {
   Redirect,
 } from "react-router-dom/cjs/react-router-dom.min";
 import MainNavigation from "./shared/components/Navigation/MainNavigation";
-import NewPlaces from "./places/pages/NewPlaces";
+import NewPlace from "./places/pages/NewPlace";
 import UserPlaces from "./places/pages/UserPlaces";
 
 import "./App.css";
@@ -26,8 +26,8 @@ function App() {
           <Route path='/:userId/places' exact>
             <UserPlaces/>
           </Route>
-          <Route path="/paces/new" exact>
-            <NewPlaces />
+          <Route path="/places/new" exact>
+            <NewPlace />
           </Route>
           <Redirect to="/" />
         </Switch>
