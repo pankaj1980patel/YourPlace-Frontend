@@ -20,33 +20,56 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const login = () => {
     setIsLoggedIn(true);
-  }
+  };
   const logout = () => {
     setIsLoggedIn(false);
+  };
+  let routes;
+  if (isLoggedIn) {
+    routes = (
+      <React.Fragment>
+        <Route path="/" exact>
+          <Users />
+        </Route>
+        <Route path="/:userId/places" exact>
+          <UserPlaces />
+        </Route>
+        <Route path="/places/new" exact>
+          <NewPlace />
+        </Route>
+        <Route path="/place/:placeId" exact>
+          <UpdatePlace />
+        </Route>
+        <Route path="/auth">
+          <Auth />
+        </Route>
+        <Redirect to="/" />
+      </React.Fragment>
+    );
+  } else {
+    routes = (
+      <React.Fragment>
+        <Route path="/" exact>
+          <Users />
+        </Route>
+        <Route path="/:userId/places" exact>
+          <UserPlaces />
+        </Route>
+        <Route path="/auth">
+          <Auth />
+        </Route>
+        <Redirect to="/auth" />
+      </React.Fragment>
+    );
   }
   return (
-    <AuthContext.Provider value={{isLoggedIn:isLoggedIn, login:login, logout:logout}}>
+    <AuthContext.Provider
+      value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}
+    >
       <Router>
         <MainNavigation />
         <main>
-          <Switch>
-            <Route path="/" exact>
-              <Users />
-            </Route>
-            <Route path="/:userId/places" exact>
-              <UserPlaces />
-            </Route>
-            <Route path="/places/new" exact>
-              <NewPlace />
-            </Route>
-            <Route path="/place/:placeId" exact>
-              <UpdatePlace />
-            </Route>
-            <Route path="/auth">
-              <Auth />
-            </Route>
-            <Redirect to="/" />
-          </Switch>
+          <Switch>{routes}</Switch>
         </main>
       </Router>
     </AuthContext.Provider>
