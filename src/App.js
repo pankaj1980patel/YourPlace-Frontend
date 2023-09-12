@@ -1,33 +1,35 @@
-// import logo from './logo.svg';
-import React, { useState } from "react";
+import React, { useState, useCallback } from 'react';
 import {
-  Route,
   BrowserRouter as Router,
-  Switch,
+  Route,
   Redirect,
-} from "react-router-dom/cjs/react-router-dom.min";
-import MainNavigation from "./shared/components/Navigation/MainNavigation";
-import NewPlace from "./places/pages/NewPlace";
-import UserPlaces from "./places/pages/UserPlaces";
-import UpdatePlace from "./places/pages/UpdatePlace";
-import Auth from "./user/pages/Auth";
-import { AuthContext } from "./shared/context/auth-context";
-import "./App.css";
+  Switch
+} from 'react-router-dom';
 
-import Users from "./user/pages/Users";
+import Users from './user/pages/Users';
+import NewPlace from './places/pages/NewPlace';
+import UserPlaces from './places/pages/UserPlaces';
+import UpdatePlace from './places/pages/UpdatePlace';
+import Auth from './user/pages/Auth';
+import MainNavigation from './shared/components/Navigation/MainNavigation';
+import { AuthContext } from './shared/context/auth-context';
 
-function App() {
+const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const login = () => {
+
+  const login = useCallback(() => {
     setIsLoggedIn(true);
-  };
-  const logout = () => {
+  }, []);
+
+  const logout = useCallback(() => {
     setIsLoggedIn(false);
-  };
+  }, []);
+
   let routes;
+
   if (isLoggedIn) {
     routes = (
-      <React.Fragment>
+      <Switch>
         <Route path="/" exact>
           <Users />
         </Route>
@@ -37,18 +39,15 @@ function App() {
         <Route path="/places/new" exact>
           <NewPlace />
         </Route>
-        <Route path="/place/:placeId" exact>
+        <Route path="/places/:placeId">
           <UpdatePlace />
         </Route>
-        <Route path="/auth">
-          <Auth />
-        </Route>
         <Redirect to="/" />
-      </React.Fragment>
+      </Switch>
     );
   } else {
     routes = (
-      <React.Fragment>
+      <Switch>
         <Route path="/" exact>
           <Users />
         </Route>
@@ -59,21 +58,20 @@ function App() {
           <Auth />
         </Route>
         <Redirect to="/auth" />
-      </React.Fragment>
+      </Switch>
     );
   }
+
   return (
     <AuthContext.Provider
       value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}
     >
       <Router>
         <MainNavigation />
-        <main>
-          <Switch>{routes}</Switch>
-        </main>
+        <main>{routes}</main>
       </Router>
     </AuthContext.Provider>
   );
-}
+};
 
 export default App;

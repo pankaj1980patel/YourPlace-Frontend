@@ -1,38 +1,42 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useContext } from 'react';
 
-import Card from "../../shared/components/UIElements/Card";
-import Button from "../../shared/components/FormElements/Button";
-import Modal from "../../shared/components/UIElements/Modal";
-import Map from "../../shared/components/UIElements/Map";
-import { AuthContext } from "../../shared/context/auth-context";
+import Card from '../../shared/components/UIElements/Card';
+import Button from '../../shared/components/FormElements/Button';
+import Modal from '../../shared/components/UIElements/Modal';
+import Map from '../../shared/components/UIElements/Map';
+import { AuthContext } from '../../shared/context/auth-context';
+import './PlaceItem.css';
 
-import "./PlaceItem.css";
-
-const PlaceItem = (props) => {
+const PlaceItem = props => {
   const auth = useContext(AuthContext);
   const [showMap, setShowMap] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+
   const openMapHandler = () => setShowMap(true);
+
   const closeMapHandler = () => setShowMap(false);
 
   const showDeleteWarningHandler = () => {
     setShowConfirmModal(true);
   };
+
   const cancelDeleteHandler = () => {
     setShowConfirmModal(false);
   };
+
   const confirmDeleteHandler = () => {
     setShowConfirmModal(false);
-    console.log("Deleting...");
+    console.log('DELETING...');
   };
+
   return (
     <React.Fragment>
       <Modal
         show={showMap}
         onCancel={closeMapHandler}
         header={props.address}
-        contentClass="place-item__model-content"
-        footerClass="place-item__model-actions"
+        contentClass="place-item__modal-content"
+        footerClass="place-item__modal-actions"
         footer={<Button onClick={closeMapHandler}>CLOSE</Button>}
       >
         <div className="map-container">
@@ -40,6 +44,8 @@ const PlaceItem = (props) => {
         </div>
       </Modal>
       <Modal
+        show={showConfirmModal}
+        onCancel={cancelDeleteHandler}
         header="Are you sure?"
         footerClass="place-item__modal-actions"
         footer={
@@ -52,8 +58,6 @@ const PlaceItem = (props) => {
             </Button>
           </React.Fragment>
         }
-        show={showConfirmModal}
-        onCancel={cancelDeleteHandler}
       >
         <p>
           Do you want to proceed and delete this place? Please note that it
@@ -74,7 +78,10 @@ const PlaceItem = (props) => {
             <Button inverse onClick={openMapHandler}>
               VIEW ON MAP
             </Button>
-            {auth.isLoggedIn && <Button to={`/place/${props.id}`}>EDIT</Button>}
+            {auth.isLoggedIn && (
+              <Button to={`/places/${props.id}`}>EDIT</Button>
+            )}
+
             {auth.isLoggedIn && (
               <Button danger onClick={showDeleteWarningHandler}>
                 DELETE
