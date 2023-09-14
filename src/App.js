@@ -18,6 +18,7 @@ import { useAuth } from "./shared/hooks/auth-hook";
 
 const App = () => {
   const {token, login, logout, userId} = useAuth();
+  // console.log(process.env.REACT_APP_BACKEND_URL)
 
   let routes;
 
