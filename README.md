@@ -47,7 +47,7 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 ![1_1_1](https://github.com/pankaj1980patel/YourPlace-Frontend/assets/86610118/b8d4fe0e-9930-4c2d-bdf1-32db776ccfab)
 
 **Home Page after login/signup**
-![1_1](https://github.com/pankaj1980patel/YourPlace-Frontend/assets/86610118/5b56b0c1-028e-455c-96ce-d6de51a6e72f)
+![1](https://github.com/pankaj1980patel/YourPlace-Frontend/assets/86610118/1ab5b116-fbf9-44e0-b6d3-7e6ebd7d28b8)
 
 **User Places**
 ![2](https://github.com/pankaj1980patel/YourPlace-Frontend/assets/86610118/b157e5b5-c717-4e48-afba-021292510bf0)
